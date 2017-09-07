@@ -1,7 +1,18 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 import requests
+import sys
+import csv
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from time import sleep
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+
+f = open('Output.csv', 'wb')
+writer = csv.writer(f)
+writer.writerow(('Name_of_Job', 'url'))
 
 
 path_to_Chrome = 'C:\Python27\Scripts\Seleniurm\chromedriver.exe'
@@ -23,8 +34,7 @@ for x in xrange(1, nextpage):
     soup = BeautifulSoup(content, "html5lib")
     jobttitles = soup.find_all("h2", {"class": "job-title"})
     for jobs in jobttitles:
-        print jobs.string
         jobsurl = jobs.find("a")
-        print jobsurl['href']
+        writer.writerow((jobs.string, jobsurl['href']))
     sleep(3)
 driver.quit()
