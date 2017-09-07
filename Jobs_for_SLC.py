@@ -22,9 +22,9 @@ for x in xrange(1, nextpage):
     content = driver.page_source
     soup = BeautifulSoup(content, "html5lib")
     jobttitles = soup.find_all("h2", {"class": "job-title"})
-    for t in jobttitles:
-        print t.string
-        comicImageTag = t.find("a")
-        print comicImageT ag['href']
+    for jobs in jobttitles:
+        print jobs.string
+        jobsurl = jobs.find("a")
+        print jobsurl['href']
     sleep(3)
 driver.quit()
